@@ -45,6 +45,15 @@ All URIs are relative to *https://setup.platon.sk/api*
 
 | Class | Method | HTTP request | Description |
 | ------------ | ------------- | ------------- | ------------- |
+| *CartApi* | [**checkCartCoupon**](docs/CartApi.md#checkcartcoupon) | **POST** /cart/coupons/check | Check and apply cart coupon |
+| *CartApi* | [**createCartItem**](docs/CartApi.md#createcartitem) | **POST** /cart/items | Add item to cart |
+| *CartApi* | [**deleteCartItem**](docs/CartApi.md#deletecartitem) | **DELETE** /cart/items/{cartItemId} | Remove item from cart |
+| *CartApi* | [**getCartBillingAddress**](docs/CartApi.md#getcartbillingaddress) | **GET** /cart/billing-address | Get cart billing address |
+| *CartApi* | [**getCartCoupon**](docs/CartApi.md#getcartcoupon) | **GET** /cart/coupons/current | Get current cart coupon |
+| *CartApi* | [**getCartTotal**](docs/CartApi.md#getcarttotal) | **GET** /cart/total | Get cart total |
+| *CartApi* | [**listCartItems**](docs/CartApi.md#listcartitems) | **GET** /cart/items | List cart items |
+| *CartApi* | [**updateCartItem**](docs/CartApi.md#updatecartitem) | **PATCH** /cart/items/{cartItemId} | Update cart item data |
+| *CartApi* | [**updateCartItemCount**](docs/CartApi.md#updatecartitemcount) | **PATCH** /cart/items/by-product/count | Update cart item count by product and domain |
 | *DNSApi* | [**createDnsRecord**](docs/DNSApi.md#creatednsrecord) | **POST** /dns/{domain}/records | Create DNS record |
 | *DNSApi* | [**deleteDnsRecord**](docs/DNSApi.md#deletednsrecord) | **DELETE** /dns/{domain}/records/{recordId} | Delete DNS record |
 | *DNSApi* | [**getDnsRecords**](docs/DNSApi.md#getdnsrecords) | **GET** /dns/{domain}/records | Get DNS records by domain |
@@ -83,6 +92,8 @@ All URIs are relative to *https://setup.platon.sk/api*
 
  - [sk.platon.controlpanel.sdk.models.ChangeDomainNameserversRequest](docs/ChangeDomainNameserversRequest.md)
  - [sk.platon.controlpanel.sdk.models.ChangeMailboxPasswordRequest](docs/ChangeMailboxPasswordRequest.md)
+ - [sk.platon.controlpanel.sdk.models.CheckCartCouponRequest](docs/CheckCartCouponRequest.md)
+ - [sk.platon.controlpanel.sdk.models.CreateCartItemRequest](docs/CreateCartItemRequest.md)
  - [sk.platon.controlpanel.sdk.models.CreateDnsRecord200Response](docs/CreateDnsRecord200Response.md)
  - [sk.platon.controlpanel.sdk.models.CreateDnsRecordRequest](docs/CreateDnsRecordRequest.md)
  - [sk.platon.controlpanel.sdk.models.CreateMailboxRequest](docs/CreateMailboxRequest.md)
@@ -113,6 +124,9 @@ All URIs are relative to *https://setup.platon.sk/api*
  - [sk.platon.controlpanel.sdk.models.SetPreferredVehicleRequest](docs/SetPreferredVehicleRequest.md)
  - [sk.platon.controlpanel.sdk.models.Time200Response](docs/Time200Response.md)
  - [sk.platon.controlpanel.sdk.models.Time200ResponseData](docs/Time200ResponseData.md)
+ - [sk.platon.controlpanel.sdk.models.UpdateCartItemCountRequest](docs/UpdateCartItemCountRequest.md)
+ - [sk.platon.controlpanel.sdk.models.UpdateCartItemRequest](docs/UpdateCartItemRequest.md)
+ - [sk.platon.controlpanel.sdk.models.UpdateCartItemRequestData](docs/UpdateCartItemRequestData.md)
  - [sk.platon.controlpanel.sdk.models.UpdateDnsRecordRequest](docs/UpdateDnsRecordRequest.md)
  - [sk.platon.controlpanel.sdk.models.VerifyOauthRequest200Response](docs/VerifyOauthRequest200Response.md)
  - [sk.platon.controlpanel.sdk.models.VerifyOauthRequest200ResponseData](docs/VerifyOauthRequest200ResponseData.md)
