@@ -32,6 +32,7 @@ import sk.platon.controlpanel.sdk.models.CreateDnsRecord200Response
 import sk.platon.controlpanel.sdk.models.ListDomains200Response
 import sk.platon.controlpanel.sdk.models.RegisterDomainRequest
 import sk.platon.controlpanel.sdk.models.RenewDomainRequest
+import sk.platon.controlpanel.sdk.models.WhoisDomain200Response
 
 import com.squareup.moshi.Json
 
@@ -517,6 +518,93 @@ open class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/domains/{domain}/renew".replace("{"+"domain"+"}", encodeURIComponent(domain.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /domains/{domain}/whois
+     * Check domain WHOIS availability and prices
+     * 
+     * @param domain Domain name
+     * @param cname Customer name for price context (optional)
+     * @param currencyId Currency ID (optional)
+     * @return WhoisDomain200Response
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun whoisDomain(domain: kotlin.String, cname: kotlin.String? = null, currencyId: kotlin.String? = null) : WhoisDomain200Response {
+        val localVarResponse = whoisDomainWithHttpInfo(domain = domain, cname = cname, currencyId = currencyId)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as WhoisDomain200Response
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /domains/{domain}/whois
+     * Check domain WHOIS availability and prices
+     * 
+     * @param domain Domain name
+     * @param cname Customer name for price context (optional)
+     * @param currencyId Currency ID (optional)
+     * @return ApiResponse<WhoisDomain200Response?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun whoisDomainWithHttpInfo(domain: kotlin.String, cname: kotlin.String?, currencyId: kotlin.String?) : ApiResponse<WhoisDomain200Response?> {
+        val localVariableConfig = whoisDomainRequestConfig(domain = domain, cname = cname, currencyId = currencyId)
+
+        return request<Unit, WhoisDomain200Response>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation whoisDomain
+     *
+     * @param domain Domain name
+     * @param cname Customer name for price context (optional)
+     * @param currencyId Currency ID (optional)
+     * @return RequestConfig
+     */
+    fun whoisDomainRequestConfig(domain: kotlin.String, cname: kotlin.String?, currencyId: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (cname != null) {
+                    put("cname", listOf(cname.toString()))
+                }
+                if (currencyId != null) {
+                    put("currency_id", listOf(currencyId.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/domains/{domain}/whois".replace("{"+"domain"+"}", encodeURIComponent(domain.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

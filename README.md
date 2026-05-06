@@ -38,6 +38,22 @@ This runs all tests and packages the library.
 * Some Kotlin and Java types are fully qualified to avoid conflicts with types defined in OpenAPI definitions.
 * Implementation of ApiClient is intended to reduce method counts, specifically to benefit Android targets.
 
+## API Base URL
+
+The default API base URL is `https://setup.platon.sk/api`. To set it explicitly for an API instance:
+
+```kotlin
+ApiClient.accessToken = "YOUR_ACCESS_TOKEN"
+
+val api = SystemApi(basePath = "https://setup.platon.sk/api")
+```
+
+You can also set the default base URL before creating API instances:
+
+```kotlin
+System.setProperty(ApiClient.BASE_URL_KEY, "https://setup.platon.sk/api")
+```
+
 <a id="documentation-for-api-endpoints"></a>
 ## Documentation for API Endpoints
 
@@ -45,6 +61,7 @@ All URIs are relative to *https://setup.platon.sk/api*
 
 | Class | Method | HTTP request | Description |
 | ------------ | ------------- | ------------- | ------------- |
+| *AuthApi* | [**createAuthToken**](docs/AuthApi.md#createauthtoken) | **POST** /auth/token | Create anonymous auth token |
 | *CartApi* | [**checkCartCoupon**](docs/CartApi.md#checkcartcoupon) | **POST** /cart/coupons/check | Check and apply cart coupon |
 | *CartApi* | [**createCartItem**](docs/CartApi.md#createcartitem) | **POST** /cart/items | Add item to cart |
 | *CartApi* | [**deleteCartItem**](docs/CartApi.md#deletecartitem) | **DELETE** /cart/items/{cartItemId} | Remove item from cart |
@@ -52,6 +69,7 @@ All URIs are relative to *https://setup.platon.sk/api*
 | *CartApi* | [**getCartCoupon**](docs/CartApi.md#getcartcoupon) | **GET** /cart/coupons/current | Get current cart coupon |
 | *CartApi* | [**getCartTotal**](docs/CartApi.md#getcarttotal) | **GET** /cart/total | Get cart total |
 | *CartApi* | [**listCartItems**](docs/CartApi.md#listcartitems) | **GET** /cart/items | List cart items |
+| *CartApi* | [**mergeCartItems**](docs/CartApi.md#mergecartitems) | **POST** /cart/items/merge | Merge anonymous cart items into current customer cart |
 | *CartApi* | [**updateCartItem**](docs/CartApi.md#updatecartitem) | **PATCH** /cart/items/{cartItemId} | Update cart item data |
 | *CartApi* | [**updateCartItemCount**](docs/CartApi.md#updatecartitemcount) | **PATCH** /cart/items/by-product/count | Update cart item count by product and domain |
 | *DNSApi* | [**createDnsRecord**](docs/DNSApi.md#creatednsrecord) | **POST** /dns/{domain}/records | Create DNS record |
@@ -64,8 +82,10 @@ All URIs are relative to *https://setup.platon.sk/api*
 | *DomainApi* | [**listDomains**](docs/DomainApi.md#listdomains) | **GET** /domains | List customer domains |
 | *DomainApi* | [**registerDomain**](docs/DomainApi.md#registerdomain) | **POST** /domains/{domain}/register | Register domain |
 | *DomainApi* | [**renewDomain**](docs/DomainApi.md#renewdomain) | **POST** /domains/{domain}/renew | Renew domain |
+| *DomainApi* | [**whoisDomain**](docs/DomainApi.md#whoisdomain) | **GET** /domains/{domain}/whois | Check domain WHOIS availability and prices |
 | *EmailApi* | [**changeMailboxPassword**](docs/EmailApi.md#changemailboxpassword) | **PATCH** /email/{domain}/mailboxes/{username}/password | Change mailbox password |
 | *EmailApi* | [**createMailbox**](docs/EmailApi.md#createmailbox) | **POST** /email/{domain}/mailboxes | Create mailbox |
+| *LLMApi* | [**spamDetection**](docs/LLMApi.md#spamdetection) | **POST** /llm/spam-detection | Classify a web form message as spam or ham using the local LLM |
 | *OAuthApi* | [**createOauthRequest**](docs/OAuthApi.md#createoauthrequest) | **POST** /oauth/requests | Create OAuth request |
 | *OAuthApi* | [**deleteOauthToken**](docs/OAuthApi.md#deleteoauthtoken) | **DELETE** /oauth/tokens | Delete OAuth token |
 | *OAuthApi* | [**getOauthScopes**](docs/OAuthApi.md#getoauthscopes) | **GET** /oauth/scopes | List available OAuth scopes |
@@ -93,6 +113,8 @@ All URIs are relative to *https://setup.platon.sk/api*
  - [sk.platon.controlpanel.sdk.models.ChangeDomainNameserversRequest](docs/ChangeDomainNameserversRequest.md)
  - [sk.platon.controlpanel.sdk.models.ChangeMailboxPasswordRequest](docs/ChangeMailboxPasswordRequest.md)
  - [sk.platon.controlpanel.sdk.models.CheckCartCouponRequest](docs/CheckCartCouponRequest.md)
+ - [sk.platon.controlpanel.sdk.models.CreateAuthToken200Response](docs/CreateAuthToken200Response.md)
+ - [sk.platon.controlpanel.sdk.models.CreateAuthToken200ResponseData](docs/CreateAuthToken200ResponseData.md)
  - [sk.platon.controlpanel.sdk.models.CreateCartItemRequest](docs/CreateCartItemRequest.md)
  - [sk.platon.controlpanel.sdk.models.CreateDnsRecord200Response](docs/CreateDnsRecord200Response.md)
  - [sk.platon.controlpanel.sdk.models.CreateDnsRecordRequest](docs/CreateDnsRecordRequest.md)
@@ -116,12 +138,18 @@ All URIs are relative to *https://setup.platon.sk/api*
  - [sk.platon.controlpanel.sdk.models.Hello200ResponseData](docs/Hello200ResponseData.md)
  - [sk.platon.controlpanel.sdk.models.ListDomains200Response](docs/ListDomains200Response.md)
  - [sk.platon.controlpanel.sdk.models.ListDomains200ResponseData](docs/ListDomains200ResponseData.md)
+ - [sk.platon.controlpanel.sdk.models.MergeCartItems200Response](docs/MergeCartItems200Response.md)
+ - [sk.platon.controlpanel.sdk.models.MergeCartItems200ResponseData](docs/MergeCartItems200ResponseData.md)
+ - [sk.platon.controlpanel.sdk.models.MergeCartItemsRequest](docs/MergeCartItemsRequest.md)
  - [sk.platon.controlpanel.sdk.models.RefreshOauthTokenRequest](docs/RefreshOauthTokenRequest.md)
  - [sk.platon.controlpanel.sdk.models.RegisterDomainRequest](docs/RegisterDomainRequest.md)
  - [sk.platon.controlpanel.sdk.models.RenewDomainRequest](docs/RenewDomainRequest.md)
  - [sk.platon.controlpanel.sdk.models.Revision200Response](docs/Revision200Response.md)
  - [sk.platon.controlpanel.sdk.models.Revision200ResponseData](docs/Revision200ResponseData.md)
  - [sk.platon.controlpanel.sdk.models.SetPreferredVehicleRequest](docs/SetPreferredVehicleRequest.md)
+ - [sk.platon.controlpanel.sdk.models.SpamDetection200Response](docs/SpamDetection200Response.md)
+ - [sk.platon.controlpanel.sdk.models.SpamDetection200ResponseData](docs/SpamDetection200ResponseData.md)
+ - [sk.platon.controlpanel.sdk.models.SpamDetectionRequest](docs/SpamDetectionRequest.md)
  - [sk.platon.controlpanel.sdk.models.Time200Response](docs/Time200Response.md)
  - [sk.platon.controlpanel.sdk.models.Time200ResponseData](docs/Time200ResponseData.md)
  - [sk.platon.controlpanel.sdk.models.UpdateCartItemCountRequest](docs/UpdateCartItemCountRequest.md)
@@ -130,6 +158,9 @@ All URIs are relative to *https://setup.platon.sk/api*
  - [sk.platon.controlpanel.sdk.models.UpdateDnsRecordRequest](docs/UpdateDnsRecordRequest.md)
  - [sk.platon.controlpanel.sdk.models.VerifyOauthRequest200Response](docs/VerifyOauthRequest200Response.md)
  - [sk.platon.controlpanel.sdk.models.VerifyOauthRequest200ResponseData](docs/VerifyOauthRequest200ResponseData.md)
+ - [sk.platon.controlpanel.sdk.models.WhoisDomain200Response](docs/WhoisDomain200Response.md)
+ - [sk.platon.controlpanel.sdk.models.WhoisDomain200ResponseData](docs/WhoisDomain200ResponseData.md)
+ - [sk.platon.controlpanel.sdk.models.WhoisDomain200ResponseDataRetval](docs/WhoisDomain200ResponseDataRetval.md)
 
 
 <a id="documentation-for-authorization"></a>

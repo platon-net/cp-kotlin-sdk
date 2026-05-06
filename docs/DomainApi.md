@@ -10,6 +10,7 @@ All URIs are relative to *https://setup.platon.sk/api*
 | [**listDomains**](DomainApi.md#listDomains) | **GET** /domains | List customer domains |
 | [**registerDomain**](DomainApi.md#registerDomain) | **POST** /domains/{domain}/register | Register domain |
 | [**renewDomain**](DomainApi.md#renewDomain) | **POST** /domains/{domain}/renew | Renew domain |
+| [**whoisDomain**](DomainApi.md#whoisDomain) | **GET** /domains/{domain}/whois | Check domain WHOIS availability and prices |
 
 
 <a id="changeDomainNameservers"></a>
@@ -296,5 +297,55 @@ Configure bearerAuth:
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a id="whoisDomain"></a>
+# **whoisDomain**
+> WhoisDomain200Response whoisDomain(domain, cname, currencyId)
+
+Check domain WHOIS availability and prices
+
+### Example
+```kotlin
+// Import classes:
+//import sk.platon.controlpanel.sdk.infrastructure.*
+//import sk.platon.controlpanel.sdk.models.*
+
+val apiInstance = DomainApi()
+val domain : kotlin.String = domain_example // kotlin.String | Domain name
+val cname : kotlin.String = cname_example // kotlin.String | Customer name for price context
+val currencyId : kotlin.String = currencyId_example // kotlin.String | Currency ID
+try {
+    val result : WhoisDomain200Response = apiInstance.whoisDomain(domain, cname, currencyId)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling DomainApi#whoisDomain")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling DomainApi#whoisDomain")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| **domain** | **kotlin.String**| Domain name | |
+| **cname** | **kotlin.String**| Customer name for price context | [optional] |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **currencyId** | **kotlin.String**| Currency ID | [optional] |
+
+### Return type
+
+[**WhoisDomain200Response**](WhoisDomain200Response.md)
+
+### Authorization
+
+
+Configure bearerAuth:
+    ApiClient.accessToken = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 

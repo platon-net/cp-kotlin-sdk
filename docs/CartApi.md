@@ -11,6 +11,7 @@ All URIs are relative to *https://setup.platon.sk/api*
 | [**getCartCoupon**](CartApi.md#getCartCoupon) | **GET** /cart/coupons/current | Get current cart coupon |
 | [**getCartTotal**](CartApi.md#getCartTotal) | **GET** /cart/total | Get cart total |
 | [**listCartItems**](CartApi.md#listCartItems) | **GET** /cart/items | List cart items |
+| [**mergeCartItems**](CartApi.md#mergeCartItems) | **POST** /cart/items/merge | Merge anonymous cart items into current customer cart |
 | [**updateCartItem**](CartApi.md#updateCartItem) | **PATCH** /cart/items/{cartItemId} | Update cart item data |
 | [**updateCartItemCount**](CartApi.md#updateCartItemCount) | **PATCH** /cart/items/by-product/count | Update cart item count by product and domain |
 
@@ -339,6 +340,52 @@ Configure bearerAuth:
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a id="mergeCartItems"></a>
+# **mergeCartItems**
+> MergeCartItems200Response mergeCartItems(mergeCartItemsRequest)
+
+Merge anonymous cart items into current customer cart
+
+### Example
+```kotlin
+// Import classes:
+//import sk.platon.controlpanel.sdk.infrastructure.*
+//import sk.platon.controlpanel.sdk.models.*
+
+val apiInstance = CartApi()
+val mergeCartItemsRequest : MergeCartItemsRequest =  // MergeCartItemsRequest | Anonymous cart merge payload
+try {
+    val result : MergeCartItems200Response = apiInstance.mergeCartItems(mergeCartItemsRequest)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling CartApi#mergeCartItems")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling CartApi#mergeCartItems")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **mergeCartItemsRequest** | [**MergeCartItemsRequest**](MergeCartItemsRequest.md)| Anonymous cart merge payload | |
+
+### Return type
+
+[**MergeCartItems200Response**](MergeCartItems200Response.md)
+
+### Authorization
+
+
+Configure bearerAuth:
+    ApiClient.accessToken = ""
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 <a id="updateCartItem"></a>
