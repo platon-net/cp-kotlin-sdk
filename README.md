@@ -61,6 +61,9 @@ All URIs are relative to *https://setup.platon.sk/api*
 
 | Class | Method | HTTP request | Description |
 | ------------ | ------------- | ------------- | ------------- |
+| *AntispamApi* | [**addAntispamMaildata**](docs/AntispamApi.md#addantispammaildata) | **POST** /antispam/maildata | Add maildata to antispam engine |
+| *AntispamApi* | [**checkAntispamMaildataRules**](docs/AntispamApi.md#checkantispammaildatarules) | **POST** /antispam/maildata/check | Check maildata against existing antispam rules |
+| *AntispamApi* | [**createAntispamEmailRule**](docs/AntispamApi.md#createantispamemailrule) | **POST** /antispam/rules | Create antispam email rule or increment existing rule hitcount |
 | *AuthApi* | [**createAuthToken**](docs/AuthApi.md#createauthtoken) | **POST** /auth/token | Create anonymous auth token |
 | *CartApi* | [**checkCartCoupon**](docs/CartApi.md#checkcartcoupon) | **POST** /cart/coupons/check | Check and apply cart coupon |
 | *CartApi* | [**createCartItem**](docs/CartApi.md#createcartitem) | **POST** /cart/items | Add item to cart |
@@ -110,9 +113,12 @@ All URIs are relative to *https://setup.platon.sk/api*
 <a id="documentation-for-models"></a>
 ## Documentation for Models
 
+ - [sk.platon.controlpanel.sdk.models.AddAntispamMaildataRequest](docs/AddAntispamMaildataRequest.md)
  - [sk.platon.controlpanel.sdk.models.ChangeDomainNameserversRequest](docs/ChangeDomainNameserversRequest.md)
  - [sk.platon.controlpanel.sdk.models.ChangeMailboxPasswordRequest](docs/ChangeMailboxPasswordRequest.md)
+ - [sk.platon.controlpanel.sdk.models.CheckAntispamMaildataRulesRequest](docs/CheckAntispamMaildataRulesRequest.md)
  - [sk.platon.controlpanel.sdk.models.CheckCartCouponRequest](docs/CheckCartCouponRequest.md)
+ - [sk.platon.controlpanel.sdk.models.CreateAntispamEmailRuleRequest](docs/CreateAntispamEmailRuleRequest.md)
  - [sk.platon.controlpanel.sdk.models.CreateAuthToken200Response](docs/CreateAuthToken200Response.md)
  - [sk.platon.controlpanel.sdk.models.CreateAuthToken200ResponseData](docs/CreateAuthToken200ResponseData.md)
  - [sk.platon.controlpanel.sdk.models.CreateCartItemRequest](docs/CreateCartItemRequest.md)
